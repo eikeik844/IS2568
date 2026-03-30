@@ -38,39 +38,57 @@ page = st.sidebar.radio("Go to:", [
 # ==========================================
 if page == "1. Explain: Ensemble Model":
     st.title("Model 1: Ensemble Machine Learning")
-    st.write("### 1. Data Preparation")
-    st.write("The dataset used is the AirQualityUCI dataset. It contained severe imperfections, such as garbage values (-200) and missing data. We cleaned this by dropping corrupted columns, dropping empty rows, and imputing missing values with the median. We also merged baseline AQI data from a Global Air Pollution dataset.")
     
-    st.write("### 2. Algorithm Theory")
-    st.write("This model uses a **Voting Regressor**, which is an ensemble technique. It combines the predictions of three distinct algorithms to create a stronger, more accurate final prediction:")
     st.markdown("""
+    ### 1. Data Preparation & Sources
+    **แหล่งอ้างอิงข้อมูล (Data Sources):**
+    * [Air Quality - UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/360/air+quality)
+    * [Global Air Pollution Dataset](https://www.kaggle.com/datasets/hasibalmuzdadid/global-air-pollution-dataset)
+
+    The primary dataset used is the **AirQualityUCI** dataset. It contained severe imperfections, such as garbage values (-200) and missing data. We cleaned this by dropping corrupted columns, dropping empty rows, and imputing missing values with the median. We also merged baseline AQI data from the **Global Air Pollution** dataset to create a more robust feature set.
+    """)
+    
+    st.markdown("""
+    ### 2. Algorithm Theory
+    This model uses a **Voting Regressor**, which is an ensemble technique. It combines the predictions of three distinct algorithms to create a stronger, more accurate final prediction:
     * **Random Forest:** A bagging method that builds multiple decision trees.
     * **Gradient Boosting:** A boosting method that builds trees sequentially to correct prior errors.
     * **Support Vector Regressor (SVR):** Finds the hyperplane that best fits the continuous data.
     """)
     
-    st.write("### 3. Development Process")
-    st.write("The features were standardized using a `StandardScaler` so that all sensors had equal weight. The Voting Regressor was then trained on 80% of the dataset to predict the target variable: Carbon Monoxide (CO).")
+    st.markdown("""
+    ### 3. Development Process
+    The features were standardized using a `StandardScaler` so that all sensors had equal weight. The Voting Regressor was then trained on 80% of the dataset to predict the target variable: Carbon Monoxide (CO).
+    """)
 
 # ==========================================
 # 4. PAGE 2: NEURAL NETWORK EXPLANATION
 # ==========================================
 elif page == "2. Explain: Neural Network":
     st.title("Model 2: Deep Neural Network")
-    st.write("### 1. Data Preparation")
-    st.write("Similar to the Ensemble model, the Neural Network requires strictly clean numerical data. Deep learning models are highly sensitive to unscaled data, so applying the `StandardScaler` was a critical step in the preparation pipeline.")
     
-    st.write("### 2. Algorithm Theory")
-    st.write("A Neural Network attempts to simulate the human brain using layers of interconnected nodes (neurons). Our architecture is a Custom Sequential Model:")
     st.markdown("""
+    ### 1. Data Preparation & Sources
+    **แหล่งอ้างอิงข้อมูล (Data Sources):**
+    * [Air Quality - UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/360/air+quality)
+    * [Global Air Pollution Dataset](https://www.kaggle.com/datasets/hasibalmuzdadid/global-air-pollution-dataset)
+
+    Similar to the Ensemble model, the Neural Network requires strictly clean numerical data. Deep learning models are highly sensitive to unscaled data. After handling the missing values and joining the global dataset, applying the `StandardScaler` was a critical step in the preparation pipeline to ensure the Neural Network converges properly.
+    """)
+    
+    st.markdown("""
+    ### 2. Algorithm Theory
+    A Neural Network attempts to simulate the human brain using layers of interconnected nodes (neurons). Our architecture is a Custom Sequential Model:
     * **Input Layer:** Receives the 7 scaled environmental features.
     * **Hidden Layers:** Three Dense layers (64, 32, and 16 neurons) using the ReLU activation function to learn complex, non-linear relationships in the gas levels.
     * **Dropout Layer:** A 20% Dropout layer was included to randomly turn off neurons during training, which prevents the model from overfitting.
     * **Output Layer:** A single linear node to predict the continuous CO value.
     """)
     
-    st.write("### 3. Development Process")
-    st.write("The model was compiled using the Adam optimizer and Mean Squared Error (MSE) as the loss function. It was trained for 50 epochs with a validation split to monitor performance and prevent overfitting.")
+    st.markdown("""
+    ### 3. Development Process
+    The model was compiled using the Adam optimizer and Mean Squared Error (MSE) as the loss function. It was trained for 50 epochs with a validation split to monitor performance and prevent overfitting.
+    """)
 
 # ==========================================
 # 5. PAGES 3 & 4: TESTING INTERFACES
